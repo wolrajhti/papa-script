@@ -48,6 +48,10 @@ async function process_dir(dir, outfilename) {
 
     let {encoding} = jschardet.detect(buff);
     
+    if (!encoding) {
+      return ;
+    }
+    
     if (!decoders[encoding]) {
       decoders[encoding] = new TextDecoder(encoding);
     }

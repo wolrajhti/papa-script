@@ -1,9 +1,12 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const {extname, resolve, relative} = require('path');
+const {TextDecoder} = require('util');
 
 const jschardet = require('jschardet');
 const {prompt} = require('inquirer');
+
+const decoders = {};
 
 async function dir_pathes(path) {
   const pathes = [];
@@ -44,12 +47,14 @@ async function process_dir(dir, outfilename) {
     const buff = fs.readFileSync(path);
 
     let {encoding} = jschardet.detect(buff);
-
-    if (encoding === 'windows-1252') {
-      encoding = 'latin1';
+    
+    if (!decoders[encoding]) {
+      decoders[encoding] = TextDecoder(encoding);
     }
+    
+    const str = decoders[encoding].decode(buff);
 
-    result += `${dashline}\n# ${relativepath} #\n${dashline}\n${buff.toString(encoding)}\n\n`;
+    result += `${dashline}\n# ${relativepath} #\n${dashline}\n${str}\n\n`;
   });
 
   fs.writeFileSync(outfilename, result);

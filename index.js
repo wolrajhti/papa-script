@@ -16,7 +16,7 @@ async function dir_pathes(path) {
       pathes.push(resolve(path, dirent.name));
     }
   }
-  return pathes;
+  return pathes; // super commentaire
 }
 
 async function txt_pathes(path) {

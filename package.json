@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "csv-parser": "^2.3.3",
     "inquirer": "^7.1.0",
     "jschardet": "^2.1.1"
   }

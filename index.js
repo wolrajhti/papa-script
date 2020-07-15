@@ -85,7 +85,7 @@ async function main() {
       const {file} = await prompt([
         {
           name: 'file',
-          message: 'Quel fichier csv souhaites-tu lister ?',
+          message: 'Quel fichier csv souhaites-tu aplatir ?',
           type: 'list',
           choices: [...files, STOP]
         }
@@ -100,7 +100,7 @@ async function main() {
         const answer = await prompt([
           {
             name: 'output',
-            message: 'Quel nom souhaites-tu donner à la liste ?',
+            message: 'Quel nom souhaites-tu donner au csv générer ?',
             type: 'string',
             default: file + '-glossary.csv',
             validate: answer => extname(answer) === '.csv' ? true : 'le nom de fichier doit se terminer par .csv !'
